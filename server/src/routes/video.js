@@ -38,33 +38,3 @@ router.post('/', async (req, res) => {
 });
 
 module.exports = router;
-
-
-
-
-// const express = require('express');
-// const router = express.Router();
-// const { generateVideo } = require('../../utils/generateVideo');
-
-// router.post('/', async (req, res) => {
-//   const { prompt } = req.body;
-//   if (!prompt) {
-//     return res.status(400).json({ error: 'Prompt is required' });
-//   }
-
-//   try {
-//     // Generate a unique filename based on timestamp
-//     const filename = `video_${Date.now()}`;
-    
-//     // Generate the video (mock implementation)
-//     const videoUrl = await generateVideo(prompt, filename);
-    
-//     // Return the video URL
-//     res.json({ videoUrl });
-//   } catch (error) {
-//     console.error('Video generation error:', error);
-//     res.status(500).json({ error: 'Failed to generate video' });
-//   }
-// });
-
-// module.exports = router;

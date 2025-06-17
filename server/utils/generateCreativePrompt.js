@@ -44,38 +44,38 @@ async function generateCreativePrompt(input) {
   let systemPrompt = '';
   if (useCase === 'suplimax' || userInput.includes('Suplimax energy drink')) {
     systemPrompt = `Generate a vivid, cinematic, video-generation-ready prompt for a Suplimax energy drink marketing video. 
-The prompt should be highly detailed and include:
-- Visual description of the Suplimax energy drink can/bottle with the name clearly visible
-- Dynamic camera movements and transitions
-- Specific lighting and color schemes
-- Background settings and environments
-- People or lifestyle elements that match the target audience
-- Product demonstration and benefits visualization
-- Cinematic shots and professional editing style
+    The prompt should be highly detailed and include:
+    - Visual description of the Suplimax energy drink can/bottle with the name clearly visible
+    - Dynamic camera movements and transitions
+    - Specific lighting and color schemes
+    - Background settings and environments
+    - People or lifestyle elements that match the target audience
+    - Product demonstration and benefits visualization
+    - Cinematic shots and professional editing style
 
-Provide only the prompt itself, without any introductory or concluding remarks.`;
-  } else if (useCase === 'real-estate' || userInput.includes('real estate')) {
-    systemPrompt = `Generate a vivid, cinematic, video-generation-ready prompt for a luxury real estate property tour video. 
-The prompt should be highly detailed and include:
-- Smooth camera movements through different rooms and areas
-- Professional lighting and staging
-- Architectural details and luxury finishes
-- Outdoor spaces and landscaping
-- Lifestyle elements that showcase the property's appeal
-- Professional real estate presentation style
-- Cinematic drone shots and elegant transitions
+    Provide only the prompt itself, without any introductory or concluding remarks.`;
+    } else if (useCase === 'real-estate' || userInput.includes('real estate')) {
+        systemPrompt = `Generate a vivid, cinematic, video-generation-ready prompt for a luxury real estate property tour video. 
+    The prompt should be highly detailed and include:
+    - Smooth camera movements through different rooms and areas
+    - Professional lighting and staging
+    - Architectural details and luxury finishes
+    - Outdoor spaces and landscaping
+    - Lifestyle elements that showcase the property's appeal
+    - Professional real estate presentation style
+    - Cinematic drone shots and elegant transitions
 
-Provide only the prompt itself, without any introductory or concluding remarks.`;
-  } else {
-    systemPrompt = `Generate a vivid, cinematic, video-generation-ready prompt for the following user idea. 
-The prompt should be highly detailed and include:
-- Specific visual elements and scenes
-- Camera movements and angles
-- Lighting and atmosphere
-- Color schemes and mood
-- Professional cinematic quality
+    Provide only the prompt itself, without any introductory or concluding remarks.`;
+    } else {
+        systemPrompt = `Generate a vivid, cinematic, video-generation-ready prompt for the following user idea. 
+    The prompt should be highly detailed and include:
+    - Specific visual elements and scenes
+    - Camera movements and angles
+    - Lighting and atmosphere
+    - Color schemes and mood
+    - Professional cinematic quality
 
-Provide only the prompt itself, without any introductory or concluding remarks, explanations, or multiple options.`;
+    Provide only the prompt itself, without any introductory or concluding remarks, explanations, or multiple options.`;
   }
 
   // Combine the instruction and user input
