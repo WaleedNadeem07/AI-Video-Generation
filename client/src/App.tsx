@@ -23,6 +23,23 @@ function App() {
   const [videoUrl, setVideoUrl] = useState('');
   const [generatedPrompt, setGeneratedPrompt] = useState('');
 
+  // Helper function to clean up markdown formatting
+  const cleanPromptFormatting = (prompt: string): string => {
+    return prompt
+      // Remove markdown bold formatting
+      .replace(/\*\*(.*?)\*\*/g, '$1')
+      // Remove markdown italic formatting
+      .replace(/\*(.*?)\*/g, '$1')
+      // Remove markdown headers
+      .replace(/^#{1,6}\s+/gm, '')
+      // Remove excessive line breaks (more than 2 consecutive)
+      .replace(/\n{3,}/g, '\n\n')
+      // Clean up any remaining markdown artifacts
+      .replace(/^\*\s+/gm, '• ') // Convert * lists to bullet points
+      .replace(/^-\s+/gm, '• ') // Convert - lists to bullet points
+      .trim();
+  };
+
   // Suplimax form data
   const [suplimaxData, setSuplimaxData] = useState<SuplimaxFormData>({
     productFeatures: '',
@@ -66,7 +83,7 @@ function App() {
       const data = await response.json();
       if (response.ok) {
         setVideoUrl(data.videoUrl);
-        setGeneratedPrompt(data.promptUsed || '');
+        setGeneratedPrompt(data.promptUsed ? cleanPromptFormatting(data.promptUsed) : '');
       } else {
         console.error('API Error:', data.error);
       }
@@ -103,7 +120,7 @@ function App() {
       const data = await response.json();
       if (response.ok) {
         setVideoUrl(data.videoUrl);
-        setGeneratedPrompt(data.promptUsed || '');
+        setGeneratedPrompt(data.promptUsed ? cleanPromptFormatting(data.promptUsed) : '');
       } else {
         console.error('API Error:', data.error);
       }
