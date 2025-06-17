@@ -8,10 +8,18 @@ async function generateGeminiResponse(prompt) {
     // Simulated processing delay
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    // Return simulated video path
+    // Extract use case information from prompt for better debugging
+    let useCaseInfo = 'General video';
+    if (prompt.includes('Suplimax energy drink')) {
+      useCaseInfo = 'Suplimax Energy Drink Marketing Video';
+    } else if (prompt.includes('virtual property tour') || prompt.includes('real estate')) {
+      useCaseInfo = 'Real Estate Property Tour Video';
+    }
+
+    // Return simulated video path with detailed debug info
     return {
       videoPath: '/videos/sample_mock_video.mp4',
-      debugInfo: 'Mocked video for prompt: ' + prompt,
+      debugInfo: `Mocked ${useCaseInfo} generated with prompt: ${prompt.substring(0, 200)}...`,
     };
   } catch (error) {
     console.error('Mock Gemini error:', error);

@@ -5,14 +5,21 @@ const generateCreativePrompt = require('../../utils/generateCreativePrompt');
 const generateGeminiResponse = require('../../utils/generateGeminiResponse');
 
 router.post('/', async (req, res) => {
-  const { userInput } = req.body;
+  const { productFeatures, formData, useCase } = req.body;
+
+  console.log('Received request:', {
+    useCase,
+    formData: formData ? 'present' : 'not present',
+    productFeatures: productFeatures ? 'present' : 'not present',
+  });
+
+  console.log('Full request body:', JSON.stringify(req.body, null, 2));
 
   try {
-    // Step 1: Generate descriptive video prompt from user input
-    console.log("Generating...");
-    const prompt = await generateCreativePrompt(userInput);
+    // Always use generateCreativePrompt to construct the prompt
+    const prompt = await generateCreativePrompt({ productFeatures, formData, useCase });
 
-    console.log("Prompt:", prompt);
+    console.log("Final Prompt:", prompt);
 
     // Step 2: Simulate video generation using that prompt
     const result = await generateGeminiResponse(prompt);
@@ -21,6 +28,8 @@ router.post('/', async (req, res) => {
       promptUsed: prompt,
       videoUrl: result.videoPath,
       message: result.debugInfo,
+      useCase: useCase || 'general',
+      formData: formData || null
     });
   } catch (error) {
     console.error(error);
@@ -29,6 +38,7 @@ router.post('/', async (req, res) => {
 });
 
 module.exports = router;
+
 
 
 
