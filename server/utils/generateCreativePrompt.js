@@ -1,8 +1,9 @@
 // Import the Gemini SDK
 const { GoogleGenAI } = require('@google/genai');
+require('dotenv').config();
 
 // Load API key securely
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "AIzaSyDEQ2J9uYBXrs7DQ-NKmmlbqlM6EqHKx_Q"});
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 /**
  * Generates a vivid, cinematic video prompt based on user input or use case.
