@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface VideoDisplayProps {
   videoUrl: string;
@@ -6,6 +6,21 @@ interface VideoDisplayProps {
 }
 
 const VideoDisplay: React.FC<VideoDisplayProps> = ({ videoUrl, generatedPrompt }) => {
+  // Track if the copy button was just clicked to show feedback
+  const [copied, setCopied] = useState(false);
+
+  // Handle copying the prompt to clipboard
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(generatedPrompt);
+      setCopied(true);
+      // Reset the copied state after 2 seconds
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy text:', err);
+    }
+  };
+
   return (
     <>
       {/* Show the generated video with controls and download button */}
@@ -38,13 +53,17 @@ const VideoDisplay: React.FC<VideoDisplayProps> = ({ videoUrl, generatedPrompt }
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
             <div className="flex items-start justify-between mb-2">
               <span className="text-sm font-medium text-gray-700">AI-Generated Video Prompt:</span>
-              {/* Copy button to let users copy the prompt to clipboard */}
+              {/* Copy button with visual feedback */}
               <button
-                onClick={() => navigator.clipboard.writeText(generatedPrompt)}
-                className="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors"
+                onClick={handleCopy}
+                className={`text-sm font-medium transition-all duration-200 ${
+                  copied 
+                    ? 'text-green-600 hover:text-green-700' 
+                    : 'text-blue-600 hover:text-blue-800'
+                }`}
                 title="Copy to clipboard"
               >
-                📋 Copy
+                {copied ? '✅ Copied!' : '📋 Copy'}
               </button>
             </div>
             {/* Display the cleaned-up prompt text */}
