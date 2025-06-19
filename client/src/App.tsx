@@ -17,7 +17,7 @@ function App() {
   
   // Store the video URL once it's generated
   const [videoUrl, setVideoUrl] = useState('');
-  
+
   // Keep the AI-generated prompt so we can show it to the user
   const [generatedPrompt, setGeneratedPrompt] = useState('');
 
